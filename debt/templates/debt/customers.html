@@ -1,0 +1,27 @@
+<div class="btn-group pb-3" role="group" aria-label="Basic example" style="overflow-x: auto; max-width: 100%" id="customer-category-action">
+	<button type="button" class="btn btn-primary text-nowrap active" data-category-id="all">All</button>
+	{% for category in categories %}	
+  		<button type="button" class="btn btn-primary text-nowrap" data-category-id="{{category.id}}">{{category.category_name}}</button>
+  	{% endfor %}
+</div>
+<div id="customer-container">
+{% for customer in customers%}
+	<div class="card my-1" style="max-height: 50px" data-id="{{customer.id}}" data-name="{{customer.name}}" data-category="{{customer.category.id}}">
+		<div class="d-flex flex-row">
+		<div class="card-header " style="width: 80%">
+		<a href="{% url 'customer-profile' %}?customer_name={{customer.name}}">
+			{{customer.name}}
+		</a>
+		</div>
+    	<button class="btn btn-success" type="button" style="width: 20%" data-toggle="modal" data-target="#newTransactionModal">
+    		<svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-plus" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+			  <path fill-rule="evenodd" d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z"/>
+			  <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z"/>
+			</svg>
+    	</button>
+    	</div>
+	</div>
+{% empty %}
+	<p class="text-center font-weight-bold">No customer found</p>
+{% endfor %}
+</div>

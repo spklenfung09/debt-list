@@ -1,0 +1,90 @@
+{% extends 'utang/index.html' %}
+{% load static %}
+{% load humanize %}
+{% block content %}
+<div class="d-flex justify-content-between">
+  <div class="dropdown mb-1">
+    <button class="btn btn-dark dropdown-toggle"
+            type="button" id="dropdownMenu">
+      {{ category }}
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
+      <a class="dropdown-item" href="{% url 'customer-list' 'All' %}">All</a>
+      <a class="dropdown-item" href="{% url 'customer-list' 'Shop' %}">Shop</a>
+      <a class="dropdown-item" href="{% url 'customer-list' 'Parag-Kahoy' %}">Parag-Kahoy</a>
+      <a class="dropdown-item" href="{% url 'customer-list' 'Parag-Assemble' %}">Parag-Assemble</a>
+      <a class="dropdown-item" href="{% url 'customer-list' 'Parag-Gulay'%}">Parag-Gulay</a>
+      <a class="dropdown-item" href="{% url 'customer-list' 'Parag-Liha'%}">Parag-Liha</a>
+      <a class="dropdown-item" href="{% url 'customer-list' 'Normal' %}">Normal</a>
+    </div>
+  </div>
+  <div class="dropdown mb-1">
+    <button class="btn btn-dark dropdown-toggle"
+            type="button" id="dropdownSort">
+      Sort By Name 
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
+      <a class="dropdown-item" href="#" id="byName">Sort By Name</a>
+      <a class="dropdown-item" href="#" id="byUnpaid">Sort By Unpaid</a>
+      <a class="dropdown-item" href="#" id="hideZero">Hide Zero</a>
+    </div>
+  </div>
+</div>
+<div class="d-flex justify-content-between flex-column mb-1">
+  <p class="p-2 bg-dark text-white px-2 rounded mb-1 font-weight-bold">No. of Customer: {{customer_number | intcomma}}</p>
+</div>
+<div class="table-responsive">
+   <table class="table table-dark rounded-bottom table-bordered table-striped text-nowrap">
+      <thead>
+        <tr> 
+          <th scope="col">Names</th>
+            {% if category == 'Shop' %}
+            <th scope="col">Store Total</th>
+            <th scope="col">Shop Total</th>
+            <th scope="col">Week Total</th>
+	    <th scope="col">Prev Balance</th>
+            {% endif %}
+          <th scope="col">Unpaid</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for data in customers_data %}
+        <tr>
+          <td id="customerName">
+            <a class="text-white d-block" href="{% url 'customer-profile' %}?customer_name={{data.customer.name}}">
+            {{data.customer.name}}
+            </a>
+          </td>
+           {% if category == 'Shop' %}
+              <td>{{data.store_week_total | intcomma }}</td>
+              <td>{{data.shop_week_total | intcomma }}</td>
+              <td>{{data.week_total | intcomma }}</td>
+	      <td>{{data.previous_balance | intcomma }}</td>
+            {% endif %}
+          <td id="unpaidAmount">{{data.unpaid_total | intcomma}}</td>
+        </tr>
+          {% empty %}
+          <tr>
+          <td colspan="3" class="text-center">No entries found</td>
+          
+          </td>
+        </tr>
+          {% endfor %}
+        <tr>
+          <td class="font-weight-bold text-center">Overall Total: </td>
+           {% if category == 'Shop' %}
+              <td>{{unpaid_store_total | intcomma }}</td>
+              <td>{{unpaid_shop_total | intcomma }}</td>
+              <td>{{unpaid_week_total | intcomma }}</td>
+	      <td>{{unpaid_balance_total | intcomma }}</td>
+            {% endif %}
+          <td>{{overall_unpaid | intcomma}}</td>
+        </tr>
+      </tbody>
+    </table> 
+  </div>
+{% endblock %}
+
+{% block js %}
+ <script type="text/javascript" src="{% static 'utang/js/customer_list.js' %}"></script>
+{% endblock %}

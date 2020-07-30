@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>CYJ Store - {{Title}}</title>
+  {% load static %}
+  {% load humanize %}
+
+  <!-- BOOTSTRAP4 -->
+  <link rel="stylesheet" href="{% static 'debt/css/bootstrap.min.css'%}">
+</head>
+<body>
+  {% csrf_token %}
+  {% include 'debt/navs.html' %}
+  <div class="container d-flex flex-column justify-content-center pb-5">
+  {% block content %}
+  <div class="d-flex justify-content-between align-items-center">
+    <h4 class="my-3 font-weight-bold">{% now "F j, Y" %}</h4>
+    <div>
+      <button class="btn btn-outline-info" style="height: 40%" data-toggle="modal" data-target="#newCategoryModal">
+      <svg width="1.5em" height="2em" viewBox="0 0 16 16" class="bi bi-box-seam" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" d="M8.186 1.113a.5.5 0 0 0-.372 0L1.846 3.5l2.404.961L10.404 2l-2.218-.887zm3.564 1.426L5.596 5 8 5.961 14.154 3.5l-2.404-.961zm3.25 1.7l-6.5 2.6v7.922l6.5-2.6V4.24zM7.5 14.762V6.838L1 4.239v7.923l6.5 2.6zM7.443.184a1.5 1.5 0 0 1 1.114 0l7.129 2.852A.5.5 0 0 1 16 3.5v8.662a1 1 0 0 1-.629.928l-7.185 2.874a.5.5 0 0 1-.372 0L.63 13.09a1 1 0 0 1-.63-.928V3.5a.5.5 0 0 1 .314-.464L7.443.184z"/>
+      </svg>
+    </button>
+    <button class="btn btn-outline-info" style="height: 40%" data-toggle="modal" data-target="#newCustomerModal">
+      <svg width="1.5em" height="2em" viewBox="0 0 16 16" class="bi bi-person-plus" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" d="M11 14s1 0 1-1-1-4-6-4-6 3-6 4 1 1 1 1h10zm-9.995-.944v-.002.002zM1.022 13h9.956a.274.274 0 0 0 .014-.002l.008-.002c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664a1.05 1.05 0 0 0 .022.004zm9.974.056v-.002.002zM6 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0zm4.5 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
+        <path fill-rule="evenodd" d="M13 7.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0v-2z"/>
+      </svg>
+    </button>
+    </div>
+  </div>
+  <div class="input-group">
+   <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="Search Name" id="name-search-input">
+  </div>
+  <h3 class="mt-4">Customers</h3>
+  <div class="jumbotron my-2" id="customer-list" style="min-height: 250px; max-height: 250px; overflow-y: auto">
+  	<!-- Places customers here -->
+  </div>
+  <h3 class="mt-4">Transactions</h3>
+  <div class="jumbotron my-2" id="transaction-list" style="min-height: 250px; max-height: 250px; overflow-y: auto">
+  	 <!-- Transactions here -->
+  </div>
+
+  <!-- MODALS -->
+  {% include 'debt/new_customer_modal.html' %}
+  {% include 'debt/new_transaction_modal.html' %}
+  {% include 'debt/edit_delete_transaction_modal.html' %}
+  {% include 'debt/new_category_modal.html' %}
+{% endblock %}
+</div>
+
+
+
+	<!-- BOOTSRAP DEPENDENCIES SCRIPTS -->
+	<script type="text/javascript" src="{% static 'debt/js/jquery-3.5.0.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'debt/js/popper.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'debt/js/bootstrap.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'debt/js/utils.js' %}"></script>
+	{% block js %}
+	<script type="text/javascript" src="{% static 'debt/js/script.js' %}"></script>
+	{% endblock%}
+	<script type="text/javascript" src="{% static 'debt/js/nav.js' %}" ></script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!-- Add new transaction modal -->
+<div class="modal" id="newTransactionModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modal-title"></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+	      <label for="category">Transaction type</label>
+	      <select class="custom-select" id="transaction-type"> 
+		    <option value="Store" selected>Store</option>
+		    <option value="Shop">Shop</option>
+		    <option value="Debit">Debit</option>
+		  </select>
+
+	    </div>
+	    <div class="form-group">
+	      <label for="name">Amount</label>
+	      <input type="number" class="form-control" id="amount" placeholder="Amount">
+	    </div>
+	     <div class="form-group">
+	      <label for="name">Description</label>
+	      <textarea class="form-control" id="description" placeholder="Description" rows="4"></textarea>
+	    </div>
+	     <div class="form-group">
+	      <label for="name">Date and Time</label>
+	      <input type="text" class="form-control" id="datetime">
+	    </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" id="add">Add</button>
+      </div>
+    </div>
+  </div>
+</div>
